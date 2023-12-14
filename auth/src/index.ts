@@ -7,10 +7,19 @@ import { currentUserRouter } from "./routes/current-user";
 import { signoutRouter } from "./routes/signout";
 import { errorHandler } from "./middlewares/error-handler";
 import { NotFoundError } from "./errors/not-found-error";
+import mongoose from "mongoose";
+import cookieSession from 'cookie-session'
 
 const app = express();
 
+app.set('trust proxy', true) // traffics are being proxied to our server through ingress nginx
 app.use(json());
+app.use(
+    cookieSession({
+        signed: false, // disable encryption
+        secure: true // for https connection
+    })
+)
 
 app.use(signupRouter)
 app.use(signinRouter)
@@ -23,6 +32,24 @@ app.all('*', async () => {
 
 app.use(errorHandler)
 
-app.listen(3000, () => {
-    console.log(`Listening on port ${3000}`)
-})
+
+const start = async () => {
+
+    if(!process.env.JWT_KEY){
+        throw new Error('JWT_KEY must be defined')
+    }
+
+    try {
+        await mongoose.connect('mongodb://auth-mongo-srv:27017/auth')
+        console.log('Connected to MongoDB');
+        
+    } catch (error) {
+        console.error(error)
+    }
+
+    app.listen(3000, () => {
+        console.log(`Listening on port ${3000}`)
+    })
+}
+
+start();
