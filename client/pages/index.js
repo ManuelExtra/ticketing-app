@@ -1,14 +1,15 @@
-import axios from "axios";
+import buildClient from "../api/build-client"
 
 const index = ({currentUser}) => {
     console.log(currentUser)
-    axios.get('/api/users/currentuser')
-    return <h1>Landing page</h1>
+    return currentUser ? <h1>Landing page</h1> : <h1>You are signout out</h1>
 }
 
-index.getInitialProps = async () => {
-    const response = await axios.get('/api/users/currentuser').catch(err => console.error(err));
-    return response.data
+index.getInitialProps = async (context) => {
+    console.log('Landing page')
+    const client = buildClient(context);
+    const {data} = await client.get('/api/users/currentuser');
+    return data;
 }
 
 export default index
