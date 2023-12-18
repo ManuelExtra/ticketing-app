@@ -1,8 +1,6 @@
 import express, { Request, Response } from "express";
 import jwt from 'jsonwebtoken';
-
-import { currentUser } from "../middlewares/current-user";
-import { requireAuth } from "../middlewares/require-auth";
+import {currentUser} from '@mxticketing/common'
 
 const router = express.Router();
 

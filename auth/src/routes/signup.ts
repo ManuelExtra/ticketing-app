@@ -1,10 +1,8 @@
 import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import jwt from 'jsonwebtoken';
-import { BadRequestError } from "../errors/bad-request-error";
-import { DatabaseConnectionError } from "../errors/database-connection-error";
-import { RequestValidationError } from "../errors/request-validator-error";
-import { validateRequest } from "../middlewares/validate-request";
+
+import { BadRequestError, validateRequest } from "@mxticketing/common";
 import { User } from "../models/user";
 
 const router = express.Router();
