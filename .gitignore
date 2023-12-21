@@ -6,3 +6,6 @@ client/package-lock.json
 
 tickets/node_modules
 tickets/package-lock.json
+
+nats-test/node_modules
+nats-test/package-lock.json
