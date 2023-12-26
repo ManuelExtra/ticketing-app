@@ -12,3 +12,6 @@ nats-test/package-lock.json
 
 orders/node_modules
 orders/package-lock.json
+
+occ-test/node_modules
+occ-test/package-lock.json
