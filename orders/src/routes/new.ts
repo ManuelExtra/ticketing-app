@@ -68,8 +68,8 @@ router.post(
       version: order.version,
       ticket: {
         id: ticket.id,
-        price: ticket.price
-      }
+        price: ticket.price,
+      },
     });
 
     res.status(201).send(order);
