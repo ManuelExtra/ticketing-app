@@ -19,7 +19,6 @@ build:
           - src: 'src/**/*.ts'
             dest: .
     - image: manuelextra/client
-    # - image: us.gcr.io/ticketing-dev-407900/auth
       context: client
       docker:
         dockerfile: Dockerfile
@@ -28,7 +27,6 @@ build:
           - src: '**/*.js'
             dest: .
     - image: manuelextra/tickets
-    # - image: us.gcr.io/ticketing-dev-407900/auth
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -37,8 +35,15 @@ build:
           - src: 'src/**/*.ts'
             dest: .
     - image: manuelextra/orders
-    # - image: us.gcr.io/ticketing-dev-407900/auth
       context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: manuelextra/expiration
+      context: expiration
       docker:
         dockerfile: Dockerfile
       sync: 
