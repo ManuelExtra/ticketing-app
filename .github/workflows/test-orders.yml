@@ -1,5 +1,5 @@
 
-name: auth-orders
+name: test-orders
 
 on:
   pull_request
