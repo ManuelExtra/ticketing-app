@@ -4,13 +4,54 @@ manifests:
   rawYaml:
     - ./infra/k8s/*
 build:
-  # local:
-  #   push: false
-  googleCloudBuild:
-    projectId: ticketing-dev-407900
+  local:
+    push: false
+  # googleCloudBuild:
+  #   projectId: ticketing-dev-407900
   artifacts:
-    - image: us.gcr.io/ticketing-dev-407900/auth
+    - image: manuelextra/auth
+    # - image: us.gcr.io/ticketing-dev-407900/auth
       context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: manuelextra/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: '**/*.js'
+            dest: .
+    - image: manuelextra/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: manuelextra/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: manuelextra/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: manuelextra/payments
+      context: payments
       docker:
         dockerfile: Dockerfile
       sync: 
