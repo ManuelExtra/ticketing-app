@@ -2,14 +2,16 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import request from "supertest";
 import jwt from "jsonwebtoken";
-import { app } from "../../../tickets/src/app";
 
 declare global {
   var signin: (id?: string) => string[];
 }
 
 jest.mock("../nats-wrapper");
-jest.mock("../stripe");
+// jest.mock("../stripe");
+
+process.env.STRIPE_KEY =
+  "sk_test_51HoQfvKiOZXcwcTb7m2ugSXM695N8i1y4LwgVx8JUx38v05PjuI4Tjdqme4dDekCztwlejTyb59WLLHdrRP8yxD200h2Z3HwkY";
 
 let mongo: any;
 beforeAll(async () => {
