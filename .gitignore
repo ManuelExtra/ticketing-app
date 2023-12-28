@@ -18,3 +18,6 @@ occ-test/package-lock.json
 
 expiration/node_modules
 expiration/package-lock.json
+
+payments/node_modules
+payments/package-lock.json
