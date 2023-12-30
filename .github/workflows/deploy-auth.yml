@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "auth/**"
-      
+
 
 jobs:
   build:
@@ -22,6 +22,6 @@ jobs:
       - run: docker push manuelextra/auth
       - uses: digitalocean/action-doct@v2
         with:
-          token: ${{secrets.DIGITAL_OCEAN_ACCESS_TOKEN}}
+          token: ${{secrets.DIGITALOCEAN_ACCESS_TOKEN}}
       - run: doct kubernetes cluster kubeconfig save clusterid
       - run: kubectl rollout restart deployment auth-depl
